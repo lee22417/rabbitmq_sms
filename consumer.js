@@ -6,7 +6,7 @@ const { send_queue } = require("./producer");
 const args = process.argv.slice(2);
 const VIRTUAL_HOST = args[0];
 const QUEUE_NAME = "sms";
-const AMQP_SERVER = process.env.AMQP_SERVER + VIRTUAL_HOST;
+const AMQP_SERVER = process.env.AMQP_SERVER + VIRTUAL_HOST; // AmazonMQ server
 
 // aligo key
 const AUTHDATA = {
@@ -46,22 +46,21 @@ exports.consume_queue = async () => {
             "data": {
               "req": { // aligo request 
                 "body": {
-                  "title": "문자 제목",
-                  "msg": "문자 내용",
+                  "title": "문자 제목", // sms title
+                  "msg": "문자 내용",   // sms content
                   "groupId": "",
                   "reserve": "Y",
-                  "targetMatch": "",
-                  "rdate": "20260101",
-                  "rtime": "1000",
-                  "sender": "",
-                  "receiver": "01012341234",
-                  "testmode_yn": "Y"
+                  "rdate": "20260101", // sms 전송일자 yyyymmdd (예약시)
+                  "rtime": "1000",     // sms 전송시간 hhss (예약시)
+                  "sender": "",        // sms 발신인
+                  "receiver": "01012341234", // sms 수신인
+                  "testmode_yn": "Y"    // test 여부
                 },
                 "headers": {
                   "Content-Type": "application/json"
                 }
               },
-              "recvList": [ // sms receiver
+              "recvList": [ // aligo 관련X, log 저장용
                 "01012341234"
               ],
             }
