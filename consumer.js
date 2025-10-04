@@ -61,7 +61,10 @@ exports.consume_queue = async () => {
                 }
               },
               "recvList": [ // aligo 관련X, log 저장용
-                "01012341234"
+                {
+                  "recv": "테스트",
+                  "number": "01012341234"
+                }
               ],
             }
           }
